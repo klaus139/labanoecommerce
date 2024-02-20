@@ -7,6 +7,10 @@ import store from './redux/store.js';
 import {Provider} from "react-redux";
 import Register from './pages/Auth/Registration.jsx';
 import Login from './pages/Auth/Login.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
+import Profile from './pages/User/Profile.jsx';
+import AdminRoute from './pages/Admin/AdminRoute.jsx';
+import CategoryList from './pages/Admin/CategoryList.jsx';
 
 import './index.css'
 
@@ -15,6 +19,19 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
+
+      {/* registered users */}
+      <Route path="" element={<PrivateRoute />}>
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/categorylist' element={<CategoryList />} />
+
+
+      </Route>
+
+      {/* Admin route */}
+      <Route path='/admin' element={<AdminRoute />}>
+
+      </Route>
     </Route>
   )
 )
@@ -24,6 +41,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
   <React.StrictMode>
    <RouterProvider router={router} />
-  </React.StrictMode>,
+  </React.StrictMode>
   </Provider>
 )

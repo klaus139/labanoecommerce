@@ -78,7 +78,7 @@ const Login = () => {
             <div className='mt-4'>
                 <p className='text-white'>
                     New Customer?{" "}
-                    <Link to={redirect ? `/register=${redirect}`:"register"}
+                    <Link to='/register'
                     className='text-pink-500 hover:underline'
                     >
                         Register
