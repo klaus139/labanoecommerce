@@ -7,6 +7,7 @@ import {
   useFetchCategoriesQuery,
   useReadCategoryQuery,
 } from "../../redux/api/categoryApiSlice";
+import AdminMenu from "./AdminMenu";
 
 import CategoryForm from "../../components/CategoryForm";
 import Modal from "../../components/Modal";
@@ -92,10 +93,11 @@ const CategoryList = () => {
   }
 
   return (
-    <div className="ml-[10rem] flex flex-col md:flex-row">
+    <div className="ml-[1rem] md:ml-[10rem] flex flex-col md:flex-row">
       {/* AdminMenu */}
+      <AdminMenu />
       <div className="md:w-3/4 p-3">
-        <div className="h-12">Manage Category</div>
+        <div className="mx-auto items-center justify-center flex h-12">Manage Category</div>
         <CategoryForm 
         value={name}
         setValue={setName}
@@ -109,7 +111,7 @@ const CategoryList = () => {
               <button className='bg-pink-500 text-white py-2 px-4 space-x-2 rounded-lg hover:bg-pink-600 focus:outline-none focus:ring-pink-500 focud:ring-opcaity-50 gap-2'
               onClick={() => {
                 {
-               
+                  setModalVisible(true)
                   setSelectedCategory(category);
                   setUpdatingName(category.name)
                 }
@@ -122,12 +124,14 @@ const CategoryList = () => {
        
         </div>
         <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)}>
-          <CategoryForm />
+          <CategoryForm 
           value={updatingName}
           setValue={(value) => setUpdatingName(value)}
           handleSubmit={handleUpdateCategory}
-          handleDelete={handleDeleteCategory}
           buttonText="update"
+          handleDelete={handleDeleteCategory}
+          />
+          
         </Modal>
       </div>
     </div>

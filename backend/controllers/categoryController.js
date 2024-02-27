@@ -46,13 +46,20 @@ const updateCategory = asyncHandler(async (req, res) => {
 
 const removeCategory = asyncHandler(async (req, res) => {
   try {
-    const removed = await Category.findByIdAndRemove(req.params.categoryId);
+    const removed = await Category.findOneAndDelete({ _id: req.params.categoryId });
+    
+    if (!removed) {
+      // Handle the case where the category was not found
+      return res.status(404).json({ error: "Category not found" });
+    }
+
     res.json(removed);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 const listCategory = asyncHandler(async (req, res) => {
   try {
